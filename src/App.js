@@ -1,26 +1,30 @@
 import React, { Component } from "react"
-import logo from "./logo.svg"
 import "./App.css"
 import { ApolloClient, gql, graphql, ApolloProvider } from "react-apollo"
 //const client = new ApolloClient()
 
+//ChannelsList
 const StarWarsTable = () => (
   <table>
-    <tr>
-      <th>Name</th>
-      <th>Gender</th>
-      <th>Homeward Name</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Homeward Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Jill</td>
+        <td>Smith</td>
+        <td>50</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>Jackson</td>
+        <td>94</td>
+      </tr>
+    </tbody>
   </table>
 )
 
