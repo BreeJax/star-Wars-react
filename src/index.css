@@ -6,12 +6,14 @@ body {
 h1 {
   background-image: url(https://cdn.theatlantic.com/assets/media/img/mt/2015/10/Cygnus_v3_BandW/lead_960.jpg?1444687096);
   color: yellow;
-  padding: 1.5em;
+  padding: 1.5em 0;
   margin: 0;
+  text-align: center;
 }
 h5 {
   background-image: url(https://img00.deviantart.net/2410/i/2014/338/0/6/purple_waves_by_monsteygoo-d88op0c.jpg);
   color: #e4a8ff;
   margin: 0;
-  padding: 1em;
+  padding: 1em 0;
+  text-align: center;
 }
