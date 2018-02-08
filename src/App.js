@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import logo from "./logo.svg"
 import "./App.css"
 import { ApolloClient, gql, graphql, ApolloProvider } from "react-apollo"
-const client = new ApolloClient()
+//const client = new ApolloClient()
 
 const StarWarsTable = () => (
   <table>
@@ -23,36 +23,6 @@ const StarWarsTable = () => (
     </tr>
   </table>
 )
-
-// export const typeDefs = `
-// type {
-//   "data": {
-//     "person": {
-//       "name": String
-//       "gender": String
-//       "homeworld": {
-//         "name": String
-//       }
-//     }
-//   }
-// }
-// type Query {
-//    data: [person]    # "[]" means this is a list of channels
-// }
-// `
-//
-// const StarWarsCharacter = gql`
-//   query StarWarsCharacter {
-//     person(personID: 4) {
-//       name
-//       gender
-//       homeworld {
-//         name
-//       }
-//     }
-//   }
-// `
-// const StarWarsCharacters = graphql(StarWarsCharacterQuery)(StarWarsCharacter)
 
 class StarWarsApp extends Component {
   constructor(props) {
