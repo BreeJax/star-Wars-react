@@ -17,7 +17,8 @@ class StarWarsApp extends Component {
     this.state = {
       people: [],
       filteredPeople: [],
-      searchTerm: ""
+      searchTerm: "",
+      gender: ""
     }
   }
 
@@ -57,7 +58,6 @@ class StarWarsApp extends Component {
       this.setState(() => ({
         filteredPeople: this.state.people
       }))
-      console.log("all")
     }
   }
   handleSearch(e) {
@@ -66,8 +66,21 @@ class StarWarsApp extends Component {
       searchTerm: term
     }))
   }
+  // handleSearch(e) {
+  //   if (this.filteredPeople.person.gender === "Female") {
+  //     let term = e.target.value.toLowerCase()
+  //     this.setState(() => ({
+  //       filteredPeople: this.state.people.filter((person) => {
+  //         searchTerm: term
+  //       })
+  //     }))
+  //
+  //     //} else if {
+  //
+  //     //  } else {
+  //   }
+  // }
   submitSearch() {
-    console.log(this.state.searchTerm)
     this.setState(() => ({
       filteredPeople: this.state.people.filter((person) => {
         return (
