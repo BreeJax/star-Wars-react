@@ -13,7 +13,7 @@ h1 {
   padding: 1.5em 0;
   margin: 0;
   text-align: center;
-  background-position: center bottom;
+  background-position: -75% 175%;
   text-shadow: 2px 2px 13px white;
   background-attachment: fixed;
 }
