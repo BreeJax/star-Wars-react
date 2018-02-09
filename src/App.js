@@ -10,8 +10,14 @@ const apolloFetch = createApolloFetch({ uri })
 class StarWarsApp extends Component {
   constructor(props) {
     super(props)
+    this.handleGenders = this.handleGenders.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.submitSearch = this.submitSearch.bind(this)
+
     this.state = {
-      people: []
+      people: [],
+      filteredPeople: [],
+      searchTerm: ""
     }
   }
 
@@ -31,14 +37,56 @@ class StarWarsApp extends Component {
     }).then((res) => {
       console.log(res.data.allPeople.people)
       const people = res.data.allPeople.people
-      this.setState(() => ({ people: people }))
+      this.setState(() => ({ people: people, filteredPeople: people }))
     })
+  }
+  handleGenders(gender) {
+    if (gender === "Female") {
+      this.setState(() => ({
+        filteredPeople: this.state.people.filter((person) => {
+          return person.gender === "female"
+        })
+      }))
+    } else if (gender === "Male") {
+      this.setState(() => ({
+        filteredPeople: this.state.people.filter((person) => {
+          return person.gender === "male"
+        })
+      }))
+    } else {
+      this.setState(() => ({
+        filteredPeople: this.state.people
+      }))
+      console.log("all")
+    }
+  }
+  handleSearch(e) {
+    let term = e.target.value.toLowerCase()
+    this.setState(() => ({
+      searchTerm: term
+    }))
+  }
+  submitSearch() {
+    console.log(this.state.searchTerm)
+    this.setState(() => ({
+      filteredPeople: this.state.people.filter((person) => {
+        return (
+          person.name.toLowerCase() === this.state.searchTerm ||
+          person.homeworld.name.toLowerCase() === this.state.searchTerm
+        )
+      })
+    }))
   }
   render() {
     return (
       <div className="StarWarsApp">
         <Header />
-        <StarWarsTable people={this.state.people} />
+        <StarWarsTable
+          people={this.state.filteredPeople}
+          handleGenders={this.handleGenders}
+          submitSearch={this.submitSearch}
+          handleSearch={this.handleSearch}
+        />
         <Footer />
       </div>
     )
@@ -61,21 +109,45 @@ const Footer = () => {
   )
 }
 
+const ChosingGenders = (props) => {
+  return (
+    <div className="Buttons">
+      <button onClick={() => props.handleGenders("All")}>All People</button>
+      <button onClick={() => props.handleGenders("Male")}>Male</button>
+      <button onClick={() => props.handleGenders("Female")}>Female</button>
+    </div>
+  )
+}
+const Search = (props) => {
+  return (
+    <div className="SearchArea">
+      <fieldset>
+        <input type="text" placeholder="Search" onChange={props.handleSearch} />
+        <button onClick={() => props.submitSearch()}>Search</button>
+      </fieldset>
+    </div>
+  )
+}
+
 const StarWarsTable = (props) => (
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Homeworld Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      {props.people.map((person) => (
-        <Person name={person.name} gender={person.gender} homeworld={person.homeworld.name} />
-      ))}
-    </tbody>
-  </table>
+  <div>
+    <ChosingGenders handleGenders={props.handleGenders} />
+    <Search submitSearch={props.submitSearch} handleSearch={props.handleSearch} />
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Homeworld Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.people.map((person) => (
+          <Person name={person.name} gender={person.gender} homeworld={person.homeworld.name} />
+        ))}
+      </tbody>
+    </table>
+  </div>
 )
 const Person = (props) => (
   <tr>
@@ -84,13 +156,5 @@ const Person = (props) => (
     <td>{props.homeworld}</td>
   </tr>
 )
-// class StarWarsPeopleInfo extends React.Component {
-//   constructor(props) {
-//     super(props)
-//   }
-//   render() {
-//     ;<div />
-//   }
-// }
 
 export default StarWarsApp
