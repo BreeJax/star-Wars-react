@@ -1,89 +1,44 @@
 import React, { Component } from "react"
 import "./App.css"
-import { ApolloClient, gql, graphql, ApolloProvider } from "react-apollo"
+//import { ApolloClient, gql, graphql, ApolloProvider } from "react-apollo"
 //const client = new ApolloClient()
+const { createApolloFetch } = require("apollo-fetch")
 
-//ChannelsList
-const StarWarsTable = () => (
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Homeward Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>50</td>
-      </tr>
-      <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td>94</td>
-      </tr>
-    </tbody>
-  </table>
-)
+const uri = "http://localhost:62159/"
+const apolloFetch = createApolloFetch({ uri })
 
 class StarWarsApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      error: null,
-      isLoaded: false,
-      items: []
+      people: []
     }
   }
 
   componentDidMount() {
-    fetch("http://localhost:62159/")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.items
-          })
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          })
-        }
-      )
+    apolloFetch({
+      query: `query {
+    	allPeople{
+    		people{
+    			name
+    			gender
+    			homeworld {
+    				name
+    			}
+    		}
+    	}
+    }`
+    }).then((res) => {
+      console.log(res.data.allPeople.people)
+      const people = res.data.allPeople.people
+      this.setState(() => ({ people: people }))
+    })
   }
-
-  render() {
-    const { error, isLoaded, items } = this.state
-    if (error) {
-      return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
-      return <div>Loading...</div>
-    } else {
-      return (
-        <ul>
-          {items.map((item) => (
-            <li key={item.name}>
-              {item.name} {item.price}
-            </li>
-          ))}
-        </ul>
-      )
-    }
-  }
-
   render() {
     return (
       <div className="StarWarsApp">
         <Header />
-        <StarWarsTable />
+        <StarWarsTable people={this.state.people} />
         <Footer />
       </div>
     )
@@ -105,5 +60,37 @@ const Footer = () => {
     </div>
   )
 }
+
+const StarWarsTable = (props) => (
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Homeworld Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {props.people.map((person) => (
+        <Person name={person.name} gender={person.gender} homeworld={person.homeworld.name} />
+      ))}
+    </tbody>
+  </table>
+)
+const Person = (props) => (
+  <tr>
+    <td>{props.name}</td>
+    <td>{props.gender}</td>
+    <td>{props.homeworld}</td>
+  </tr>
+)
+// class StarWarsPeopleInfo extends React.Component {
+//   constructor(props) {
+//     super(props)
+//   }
+//   render() {
+//     ;<div />
+//   }
+// }
 
 export default StarWarsApp
