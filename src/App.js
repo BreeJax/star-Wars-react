@@ -4,7 +4,7 @@ import "./App.css"
 //const client = new ApolloClient()
 const { createApolloFetch } = require("apollo-fetch")
 
-const uri = "http://localhost:62159/"
+const uri = "http://localhost:63578"
 const apolloFetch = createApolloFetch({ uri })
 
 class StarWarsApp extends Component {
@@ -51,6 +51,12 @@ class StarWarsApp extends Component {
       this.setState(() => ({
         filteredPeople: this.state.people.filter((person) => {
           return person.gender === "male"
+        })
+      }))
+    } else if (gender === "Other") {
+      this.setState(() => ({
+        filteredPeople: this.state.people.filter((person) => {
+          return !(person.gender == "female" || person.gender == "male")
         })
       }))
     } else {
@@ -127,6 +133,7 @@ const ChosingGenders = (props) => {
       <button onClick={() => props.handleGenders("All")}>All People</button>
       <button onClick={() => props.handleGenders("Male")}>Male</button>
       <button onClick={() => props.handleGenders("Female")}>Female</button>
+      <button onClick={() => props.handleGenders("Other")}>Other</button>
     </div>
   )
 }
