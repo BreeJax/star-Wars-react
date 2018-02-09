@@ -17,8 +17,7 @@ class StarWarsApp extends Component {
     this.state = {
       people: [],
       filteredPeople: [],
-      searchTerm: "",
-      gender: ""
+      searchTerm: ""
     }
   }
 
