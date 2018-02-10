@@ -125,3 +125,7 @@ class StarWarsApp extends Component {
 //I felt like having Search and ChosingGenders apart would be easier in the long run for debugging purposes. Not sure if I'm right yet.
 
 export default StarWarsApp
+
+//I just want to be completly honest about something: I wouldn't have been able to complete this if not for my resources. Everything about this app is frankly new to me. This is my first attempt at fetches, this is my first time creating a search function with react- this app was a lot of first.
+//Yes, I did do what I could alone. However, when I come upon a wall, and I have no idea where to turn for information, how to attack a problem, or how I'm even writing the code wrong, I turn to people whom I knew can help, or will at least attempt to help.
+//I do thank you for the challenge. It was a lot of fun, and something I'm going to keep around to go back to.
