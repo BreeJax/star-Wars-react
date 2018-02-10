@@ -4,6 +4,9 @@ body {
   font-family: sans-serif;
   background-image: url(https://cdn.theatlantic.com/assets/media/img/mt/2015/10/Cygnus_v3_BandW/lead_960.jpg?1444687096);
   background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
 }
 h1 {
   background-image: url(https://i.kinja-img.com/gawker-media/image/upload/t_original/foetzbfwljhidnniu5qt.png);
@@ -11,8 +14,7 @@ h1 {
   background-size: cover;
   padding: 1.5em 0;
   margin: 0;
-  text-align: center;
-  background-position: bottom center;
+  background-position: -75% 175%;
   text-shadow: 2px 2px 13px white;
   background-attachment: fixed;
 }
@@ -23,17 +25,18 @@ h5 {
   color: #e4a8ff;
   margin: 0;
   padding: 1em 0;
-  text-align: center;
   background-attachment: fixed;
   background-position: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 table {
-  text-align: center;
   border: 4px solid purple;
-  margin: auto;
+  margin: auto auto 2.5em auto;
   border-collapse: collapse;
   background-color: white;
-  margin-bottom: 0.5em;
   font-size: 1.5em;
 }
 
@@ -47,10 +50,7 @@ button {
   font-size: 0.85em;
   margin-right: 0.1em;
 }
-.Buttons,
-.SearchArea {
-  text-align: center;
-}
+
 fieldset {
   border: 0;
 }
